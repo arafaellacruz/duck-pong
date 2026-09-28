@@ -15,9 +15,8 @@ services:
   - type: web
     name: duck-pong-frontend
     runtime: static
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
+    buildCommand: corepack enable && corepack prepare pnpm@10.4.1 --activate && pnpm install --frozen-lockfile && pnpm build
     staticPublishPath: dist/public
-    plan: free
     envVars:
       - key: VITE_BACKEND_URL
         sync: false
