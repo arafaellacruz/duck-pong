@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: duck-pong-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+
+  - type: web
+    name: duck-pong-frontend
+    runtime: static
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
+    staticPublishPath: dist/public
+    plan: free
+    envVars:
+      - key: VITE_BACKEND_URL
+        sync: false
